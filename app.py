@@ -21,4 +21,4 @@ def exercise1():
         return "id_list_message=t-נכון"
 
     # Неправильный ответ: попробовать ещё раз
-    return "id_list_message=t-נסה שוב&read=f-/2/000=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+    return "id_list_message=t-נסה שוב&go_to_folder=/2"
