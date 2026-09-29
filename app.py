@@ -20,3 +20,7 @@ def exercise1():
 
     # Неправильный ответ: попробовать ещё раз
     return "id_list_message=t-נסה שוב&go_to_folder=/2"
+    
+@app.route("/test_params")
+def test_params():
+    return str(dict(request.args))
