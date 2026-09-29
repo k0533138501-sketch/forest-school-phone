@@ -52,3 +52,11 @@ def random_test():
 
     exercise = random.randint(0, 9)
     return str(exercise)
+@app.route("/combined_test")
+def combined_test():
+    import random
+
+    exercise = random.randint(0, 9)
+    filename = f"{exercise:03d}"
+
+    return f"exercise={exercise}, file=/90/{filename}"
