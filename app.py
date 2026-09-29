@@ -46,3 +46,9 @@ def check_test():
         return "CORRECT"
 
     return "WRONG"
+@app.route("/random_test")
+def random_test():
+    import random
+
+    exercise = random.randint(0, 9)
+    return str(exercise)
