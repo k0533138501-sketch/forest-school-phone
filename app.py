@@ -59,4 +59,4 @@ def combined_test():
     exercise = random.randint(0, 9)
     filename = f"{exercise:03d}"
 
-    return f"exercise={exercise}, file=/90/{filename}"
+   return f"read=f-/90/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
