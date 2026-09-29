@@ -24,3 +24,25 @@ def exercise1():
 @app.route("/test_params")
 def test_params():
     return str(dict(request.args))
+@app.route("/check_test")
+def check_test():
+    exercise = request.args.get("exercise", "")
+    answer = request.args.get("answer", "")
+
+    correct_answers = {
+        "0": "3",
+        "1": "4",
+        "2": "2",
+        "3": "4",
+        "4": "5",
+        "5": "5",
+        "6": "5",
+        "7": "5",
+        "8": "6",
+        "9": "6",
+    }
+
+    if exercise in correct_answers and answer == correct_answers[exercise]:
+        return "CORRECT"
+
+    return "WRONG"
