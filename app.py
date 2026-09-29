@@ -20,11 +20,3 @@ def exercise1():
 
     # Неправильный ответ: попробовать ещё раз
     return "id_list_message=t-נסה שוב&go_to_folder=/2"
-@app.route("/exercise_test")
-def exercise_test():
-    import random
-
-    number = random.randint(0, 9)
-    filename = f"{number:03d}"
-
-    return f"read=f-/90/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
