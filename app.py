@@ -1,7 +1,7 @@
 from flask import Flask, request
 
 app = Flask(__name__)
-
+CALL_EXERCISES = {}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
@@ -56,8 +56,16 @@ def random_test():
 def combined_test():
     print("YEMOT ARGS:", dict(request.args), flush=True)
     import random
-
-    exercise = random.randint(0, 9)
+    call_id = request.args.get("ApiCallId", "")
+    answer = request.args.get("answer", "")
+    if not answer:
+        exercise = random.randint(0, 9)
+        CALL_EXERCISES[call_id] = exercise
+    else:
+        exercise = CALL_EXERCISES.get(call_id)
+        if exercise is not None and answer == correct_answers[str(exercise)]:
+            return "id_list_message=t-נכון"
+        return "id_list_message=t-נסה שוב"     
     filename = f"{exercise:03d}"
 
     return f"read=f-/4/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
