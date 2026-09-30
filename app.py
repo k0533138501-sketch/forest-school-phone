@@ -54,6 +54,7 @@ def random_test():
     return str(exercise)
 @app.route("/combined_test")
 def combined_test():
+    print("YEMOT ARGS:", dict(request.args), flush=True)
     import random
 
     exercise = random.randint(0, 9)
