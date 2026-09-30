@@ -87,7 +87,12 @@ def combined_check():
 @app.route("/retry_test")
 def retry_test():
     call_id = request.args.get("ApiCallId", "")
+    answer = request.args.get("answer", "")
     exercise = CALL_EXERCISES.get(call_id)
+    if answer:
+        if exercise is not None and answer == CORRECT_ANSWERS[str(exercise)]:
+            return "id_list_message=t-נכון&go_to_folder=/4"
+        return "id_list_message=t-נסה שוב&go_to_folder=/5"
     filename = f"{exercise:03d}"
     return f"read=f-/4/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     
