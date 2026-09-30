@@ -77,11 +77,19 @@ def combined_test():
         exercise = CALL_EXERCISES.get(call_id)
         if exercise is not None and answer == CORRECT_ANSWERS[str(exercise)]:
             return "id_list_message=t-נכון&go_to_folder=/4"
-        return f"id_list_message=t-נסה שוב&read=f-/4/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"  
+        return "id_list_message=t-נסה שוב&go_to_folder=/5"
     filename = f"{exercise:03d}"
 
     return f"read=f-/4/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 @app.route("/combined_check")
 def combined_check():
     return str(dict(request.args))
+@app.route("/retry_test")
+def retry_test():
+    call_id = request.args.get("ApiCallId", "")
+    exercise = CALL_EXERCISES.get(call_id)
+    filename = f"{exercise:03d}"
+    return f"read=f-/4/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+    
+    
 
