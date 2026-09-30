@@ -76,7 +76,7 @@ def combined_test():
     else:
         exercise = CALL_EXERCISES.get(call_id)
         if exercise is not None and answer == CORRECT_ANSWERS[str(exercise)]:
-            return "id_list_message=t-נכון"
+            return "id_list_message=t-נכון&go_to_folder=/4"
         return "id_list_message=t-נסה שוב"     
     filename = f"{exercise:03d}"
 
