@@ -60,3 +60,7 @@ def combined_test():
     filename = f"{exercise:03d}"
 
     return f"read=f-/90/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no&exercise={exercise}"
+@app.route("/combined_check")
+def combined_check():
+    return str(dict(request.args))
+
