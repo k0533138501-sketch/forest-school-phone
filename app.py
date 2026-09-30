@@ -2,6 +2,18 @@ from flask import Flask, request
 
 app = Flask(__name__)
 CALL_EXERCISES = {}
+CORRECT_ANSWERS = {
+    "0": "3",
+    "1": "4",
+    "2": "2",
+    "3": "4",
+    "4": "5",
+    "5": "5",
+    "6": "5",
+    "7": "5",
+    "8": "6",
+    "9": "6",
+}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
@@ -63,7 +75,7 @@ def combined_test():
         CALL_EXERCISES[call_id] = exercise
     else:
         exercise = CALL_EXERCISES.get(call_id)
-        if exercise is not None and answer == correct_answers[str(exercise)]:
+        if exercise is not None and answer == CORRECT_ANSWERS[str(exercise)]:
             return "id_list_message=t-נכון"
         return "id_list_message=t-נסה שוב"     
     filename = f"{exercise:03d}"
