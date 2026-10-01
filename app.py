@@ -1,5 +1,5 @@
 from flask import Flask, request
-
+import random
 app = Flask(__name__)
 CALL_EXERCISES = {}
 CORRECT_ANSWERS = {
@@ -97,4 +97,26 @@ def retry_test():
     return f"read=f-/4/{filename}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     
     
+def run_exercises(correct_answers, audio_folder, answer):
+    call_id = request.args.get("ApiCallId", "")
+    saved = CALL_EXERCISES.get(call_id)
 
+    if saved is None:
+        exercise = random.randint(0, len(correct_answers) - 1)
+        saved = {
+            "exercise": exercise,
+            "correct_answer": correct_answers[str(exercise)]
+        }
+        CALL_EXERCISES[call_id] = saved
+
+    exercise = saved["exercise"]
+    correct_answer = saved["correct_answer"]
+
+    if not answer:
+        return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+
+    if answer == correct_answer:
+        CALL_EXERCISES.pop(call_id, None)
+        return "id_list_message=t-נכון"
+
+    return "id_list_message=t-נסה שוב"
