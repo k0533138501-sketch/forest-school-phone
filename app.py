@@ -117,7 +117,7 @@ def run_exercises(correct_answers, audio_folder, answer):
 
     if answer == correct_answer:
         CALL_EXERCISES.pop(call_id, None)
-        return "id_list_message=t-נכון"
+        return "id_list_message=t-נכון&go_to_folder=/4"
 
     return "id_list_message=t-נסה שוב&go_to_folder=/4"
     
