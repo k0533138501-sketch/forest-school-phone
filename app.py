@@ -14,6 +14,18 @@ CORRECT_ANSWERS = {
     "8": "6",
     "9": "6",
 }
+SUBTRACTION_ANSWERS = {
+    "0": "3",
+    "1": "3",
+    "2": "4",
+    "3": "4",
+    "4": "5",
+    "5": "5",
+    "6": "6",
+    "7": "6",
+    "8": "7",
+    "9": "8",
+}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
@@ -98,7 +110,7 @@ def retry_test():
     
     
 def run_exercises(correct_answers, audio_folder, answer):
-    call_id = request.args.get("ApiCallId", "")
+    call_id = request.args.get("ApiCallId", "") + audio_folder
     saved = CALL_EXERCISES.get(call_id)
 
     if saved is None:
@@ -130,11 +142,15 @@ def run_exercises(correct_answers, audio_folder, answer):
         saved["exercise"] = exercise
         saved["correct_answer"] = correct_answers[str(exercise)]
         saved["had_error"] = False
-        return "id_list_message=t-נכון&go_to_folder=/4"
+        return f"id_list_message=t-נכון&go_to_folder={audio_folder}"
     saved["had_error"] = True
-    return "id_list_message=t-נסה שוב&go_to_folder=/4"
+    return f"id_list_message=t-נסה שוב&go_to_folder={audio_folder}"
     
 @app.route("/level1_test")
 def level1_test():
     answer = request.args.get("answer", "")
     return run_exercises(CORRECT_ANSWERS, "/4", answer)
+    @app.route("/level2_test")
+def level2_test():
+    answer = request.args.get("answer", "")
+    return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
