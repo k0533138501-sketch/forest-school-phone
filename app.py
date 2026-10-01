@@ -105,7 +105,10 @@ def run_exercises(correct_answers, audio_folder, answer):
         exercise = random.randint(0, len(correct_answers) - 1)
         saved = {
             "exercise": exercise,
-            "correct_answer": correct_answers[str(exercise)]
+            "correct_answer": correct_answers[str(exercise)],
+            "total": 0,
+            "first_try_correct": 0,
+            "had_error": False
         }
         CALL_EXERCISES[call_id] = saved
 
@@ -116,9 +119,19 @@ def run_exercises(correct_answers, audio_folder, answer):
         return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 
     if answer == correct_answer:
-        CALL_EXERCISES.pop(call_id, None)
+        saved["total"] += 1
+        if not saved["had_error"]:
+            saved["first_try_correct"] += 1
+        if saved["total"] >= 10:
+            result = saved["first_try_correct"]
+            CALL_EXERCISES.pop(call_id, None)
+            return f"id_list_message=t-נכון. ענית על עשר שאלות. ענית נכון בפעם הראשונה על {result} שאלות"
+        exercise = random.randint(0, len(correct_answers) - 1)
+        saved["exercise"] = exercise
+        saved["correct_answer"] = correct_answers[str(exercise)]
+        saved["had_error"] = False
         return "id_list_message=t-נכון&go_to_folder=/4"
-
+    saved["had_error"] = True
     return "id_list_message=t-נסה שוב&go_to_folder=/4"
     
 @app.route("/level1_test")
