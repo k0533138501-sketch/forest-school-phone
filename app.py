@@ -150,7 +150,7 @@ def run_exercises(correct_answers, audio_folder, answer):
 def level1_test():
     answer = request.args.get("answer", "")
     return run_exercises(CORRECT_ANSWERS, "/4", answer)
-    @app.route("/level2_test")
+@app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
     return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
