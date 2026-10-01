@@ -120,3 +120,8 @@ def run_exercises(correct_answers, audio_folder, answer):
         return "id_list_message=t-נכון"
 
     return "id_list_message=t-נסה שוב"
+    
+@app.route("/level1_test")
+def level1_test():
+    answer = request.args.get("answer", "")
+    return run_exercises(CORRECT_ANSWERS, "/4", answer)
