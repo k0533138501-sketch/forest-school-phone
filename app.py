@@ -153,4 +153,4 @@ def level1_test():
 @app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
-    return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
+    return run_exercises(SUBTRACTION_ANSWERS, "/5", answer)
