@@ -155,7 +155,7 @@ def level1_test():
 @app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
-    return "read=f-/7/000=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+    return "read=f-/7/000=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no&"
     #return run_exercises(CORRECT_ANSWERS, "/4", answer)
     #return "read=f-/4/010=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     
