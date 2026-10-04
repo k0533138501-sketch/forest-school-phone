@@ -151,11 +151,11 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
 @app.route("/level1_test")
 def level1_test():
     answer = request.args.get("answer", "")
-    return run_exercises(CORRECT_ANSWERS, "/4", answer, next_folder="/6")
+    return run_exercises(SUBTRACTION_ANSWERS, "/4", answer)
 @app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
-    return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
+    #return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
     #return run_exercises(CORRECT_ANSWERS, "/4", answer)
     #return "read=f-/4/010=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     
