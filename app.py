@@ -114,8 +114,8 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
     saved = CALL_EXERCISES.get(call_id)
 
     if saved is None:
-        #exercise = random.randint(0, len(correct_answers) - 1)
-        exercise = 5
+        exercise = random.randint(0, len(correct_answers) - 1)
+       
         saved = {
             "exercise": exercise,
             "correct_answer": correct_answers[str(exercise)],
@@ -129,7 +129,7 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
     correct_answer = saved["correct_answer"]
 
     if not answer:
-        return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no&"
+        return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 
     if answer == correct_answer:
         saved["total"] += 1
@@ -141,8 +141,8 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
             if next_folder:
                 return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder={next_folder}"
             return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&"
-        exercise = 5
-        #exercise = random.randint(0, len(correct_answers) - 1)
+        
+        exercise = random.randint(0, len(correct_answers) - 1)
         saved["exercise"] = exercise
         saved["correct_answer"] = correct_answers[str(exercise)]
         saved["had_error"] = False
@@ -153,7 +153,7 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
 @app.route("/level1_test")
 def level1_test():
     answer = request.args.get("answer", "")
-    return run_exercises(SUBTRACTION_ANSWERS, "/4", answer)
+    return run_exercises(CORRECT_ANSWERS, "/4", answer, next_folder="/6")
 @app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
