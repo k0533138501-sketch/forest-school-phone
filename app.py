@@ -153,7 +153,7 @@ def run_exercises(correct_answers, audio_folder, answer, next_folder=None):
 @app.route("/level1_test")
 def level1_test():
     answer = request.args.get("answer", "")
-    return run_exercises(CORRECT_ANSWERS, "/4", answer, next_folder="/6")
+    return run_exercises(CORRECT_ANSWERS, "/4", answer)
 @app.route("/level2_test")
 def level2_test():
     answer = request.args.get("answer", "")
