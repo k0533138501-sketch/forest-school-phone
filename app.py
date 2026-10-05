@@ -159,6 +159,6 @@ def level2_test():
     return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
     #return run_exercises(CORRECT_ANSWERS, "/4", answer)
     #return "read=f-/4/010=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
-    @app.route("/transition")
-    def transition():
-        return "id_list_message=f-/7/000&go_to_folder=/6" 
+@app.route("/transition")
+def transition():
+    return "id_list_message=f-/7/000&go_to_folder=/6" 
