@@ -40,7 +40,7 @@ def exercise1():
 
     # Правильный ответ: 2 + 1 = 3
     if answer == "3":
-        return "id_list_message=t-נכון&go_to_folder=/3"
+        return "id_list_message=t-נכון&go_to_folder=/7"
 
     # Неправильный ответ: попробовать ещё раз
     return "id_list_message=t-נסה שוב&go_to_folder=/2"
