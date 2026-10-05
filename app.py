@@ -114,7 +114,7 @@ def run_exercises(correct_answers, audio_folder, answer):
     saved = CALL_EXERCISES.get(call_id)
 
     if saved is None:
-        exercise = 0
+        exercise = random.randint(0, len(correct_answers) - 1)
        
         saved = {
             "exercise": exercise,
