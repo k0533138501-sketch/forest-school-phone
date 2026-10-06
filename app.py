@@ -162,3 +162,6 @@ def level2_test():
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
+@app.route("/story1")
+def story1():
+    return "id_list_message=f-/1/000&go_to_folder=/4"
