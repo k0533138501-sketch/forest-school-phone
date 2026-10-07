@@ -173,7 +173,9 @@ def level2_test():
 def mixed_test():
     answer = request.args.get("answer", "")
     return run_exercises(MIXED_ANSWERS, "/9", answer)
-   
+@app.route("/fable_transition")
+def fable_transition():
+    return "id_list_message=f-/8/000&go_to_folder=/9"   
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
