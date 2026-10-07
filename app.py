@@ -177,7 +177,10 @@ def mixed_test():
     return run_exercises(MIXED_ANSWERS, "/9", answer)
 @app.route("/fable_transition")
 def fable_transition():
-    return "id_list_message=f-/8/000&go_to_folder=/9"   
+    return "id_list_message=f-/8/000&go_to_folder=/9" 
+@app.route("/second_fable")
+def second_fable():
+    return "id_list_message=f-/10/000"
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
