@@ -181,6 +181,17 @@ def fable_transition():
 @app.route("/second_fable")
 def second_fable():
     return "id_list_message=f-/10/000"
+@app.route("/multiplication_test")
+def multiplication_test():
+    answer = request.args.get("answer", "")
+
+    if not answer:
+        return "read=f-/11/000=answer,,1,2,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+
+    if answer == "2":
+        return "id_list_message=t-נכון"
+
+    return "id_list_message=t-נסה שוב"
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
