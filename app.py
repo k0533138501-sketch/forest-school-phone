@@ -186,7 +186,7 @@ def multiplication_test():
     answer = request.args.get("answer", "")
 
     if not answer:
-        return "read=f-/11/000=answer,,1,2,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        return "read=f-/11/000=answer,,2,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 
     if answer == "2":
         return "id_list_message=t-נכון"
