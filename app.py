@@ -26,6 +26,18 @@ SUBTRACTION_ANSWERS = {
     "8": "7",
     "9": "8",
 }
+MIXED_ANSWERS = {
+    "0": "6",
+    "1": "5",
+    "2": "7",
+    "3": "6",
+    "4": "8",
+    "5": "6",
+    "6": "9",
+    "7": "7",
+    "8": "10",
+    "9": "5",
+}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
@@ -158,8 +170,11 @@ def level1_test():
 def level2_test():
     answer = request.args.get("answer", "")
     return run_exercises(SUBTRACTION_ANSWERS, "/6", answer)
-    #return run_exercises(CORRECT_ANSWERS, "/4", answer)
-    #return "read=f-/4/010=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+@app.route("/mixed_test")
+def mixed_test():
+    answer = request.args.get("answer", "")
+    return run_exercises(MIXED_ANSWERS, "/9", answer)
+   
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
