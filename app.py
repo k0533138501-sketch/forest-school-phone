@@ -186,9 +186,9 @@ def multiplication_test():
     answer = request.args.get("answer", "")
 
     if not answer:
-        return "read=f-/11/000=answer,,2,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        return "read=f-/11/004=answer,,2,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 
-    if answer == "2":
+    if answer == "10":
         return "id_list_message=t-נכון"
 
     return "id_list_message=t-נסה שוב"
