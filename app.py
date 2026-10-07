@@ -151,7 +151,9 @@ def run_exercises(correct_answers, audio_folder, answer):
             CALL_EXERCISES.pop(call_id, None)
             if audio_folder == "/4":
                 return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/7"
-            return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/8"
+            if audio_folder == "/6":
+                return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/8"
+            return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות"
                 
         exercise = random.randint(0, len(correct_answers) - 1)
         saved["exercise"] = exercise
