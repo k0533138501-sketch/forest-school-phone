@@ -141,7 +141,8 @@ def run_exercises(correct_answers, audio_folder, answer):
     correct_answer = saved["correct_answer"]
 
     if not answer:
-        return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        max_digits = 2 if audio_folder == "/9" else 1
+    return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,{max_digits},7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
 
     if answer == correct_answer:
         saved["total"] += 1
