@@ -38,6 +38,13 @@ MIXED_ANSWERS = {
     "8": "9",
     "9": "5",
 }
+MULTIPLICATION_2_ANSWERS = {
+    "0": "2",
+    "1": "4",
+    "2": "6",
+    "3": "8",
+    "4": "10",
+}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
