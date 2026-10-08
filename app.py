@@ -297,7 +297,7 @@ def multiplication3_test():
             return "id_list_message=t-נכון.t-ועכשיו ננסה בלי סדר&go_to_folder=/12"
 
         CALL_EXERCISES.pop(call_id, None)
-        return "id_list_message=f-/9/010.t-כל הכבוד"
+        return "id_list_message=f-/9/010.t-כל הכבוד&go_to_folder=/13"
 
     return "id_list_message=t-נכון&go_to_folder=/12"
 
