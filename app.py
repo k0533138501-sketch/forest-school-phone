@@ -45,6 +45,13 @@ MULTIPLICATION_2_ANSWERS = {
     "3": "8",
     "4": "10",
 }
+MULTIPLICATION_3_ANSWERS = {
+    "0": "3",
+    "1": "6",
+    "2": "9",
+    "3": "12",
+    "4": "15",
+}
 @app.route("/")
 def home():
     return "Forest School Phone is running"
