@@ -253,6 +253,54 @@ def multiplication_test():
         return "id_list_message=f-/9/010.t-כל הכבוד"
 
     return "id_list_message=t-נכון&go_to_folder=/11"
+@app.route("/multiplication3_test")
+def multiplication3_test():
+    answer = request.args.get("answer", "")
+    call_id = request.args.get("ApiCallId", "") + "/12"
+
+    saved = CALL_EXERCISES.get(call_id)
+
+    if saved is None:
+        saved = {
+            "stage": 0,
+            "index": 0,
+            "order": list(range(5)),
+            "had_error": False
+        }
+        CALL_EXERCISES[call_id] = saved
+
+    exercise = saved["order"][saved["index"]]
+    correct = MULTIPLICATION_3_ANSWERS[str(exercise)]
+
+    if not answer:
+        return (
+            f"read=f-/12/{exercise:03d}=answer,,2,1,7,"
+            "No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        )
+
+    if answer != correct:
+        saved["had_error"] = True
+        return "id_list_message=t-נסה שוב&go_to_folder=/12"
+
+    saved["had_error"] = False
+    saved["index"] += 1
+
+    if saved["index"] == 5:
+        saved["stage"] += 1
+        saved["index"] = 0
+
+        if saved["stage"] == 1:
+            return "id_list_message=t-נכון.t-מצוין&go_to_folder=/12"
+
+        if saved["stage"] == 2:
+            saved["order"] = random.sample(range(5), 5)
+            return "id_list_message=t-נכון.t-ועכשיו ננסה בלי סדר&go_to_folder=/12"
+
+        CALL_EXERCISES.pop(call_id, None)
+        return "id_list_message=f-/9/010.t-כל הכבוד"
+
+    return "id_list_message=t-נכון&go_to_folder=/12"
+
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
