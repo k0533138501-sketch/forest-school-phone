@@ -191,14 +191,66 @@ def second_fable():
 @app.route("/multiplication_test")
 def multiplication_test():
     answer = request.args.get("answer", "")
+    call_id = request.args.get("ApiCallId", "") + "/11"
+
+    saved = CALL_EXERCISES.get(call_id)
+
+    if saved is None:
+        saved = {
+            "stage": 0,
+            "index": 0,
+            "order": list(range(5)),
+            "had_error": False,
+            "first_try_correct": 0
+        }
+        CALL_EXERCISES[call_id] = saved
+
+    exercise = saved["order"][saved["index"]]
+    correct = MULTIPLICATION_2_ANSWERS[str(exercise)]
 
     if not answer:
-        return "read=f-/11/004=answer,,2,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        return (
+            f"read=f-/11/{exercise:03d}=answer,,2,1,7,"
+            "No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
+        )
 
-    if answer == "10":
-        return "id_list_message=t-נכון"
+    if answer != correct:
+        saved["had_error"] = True
+        return "id_list_message=t-נסה שוב&go_to_folder=/11"
 
-    return "id_list_message=t-נסה שוב"
+    if not saved["had_error"]:
+        saved["first_try_correct"] += 1
+
+    saved["had_error"] = False
+    saved["index"] += 1
+
+    if saved["index"] == 5:
+        saved["stage"] += 1
+        saved["index"] = 0
+
+        if saved["stage"] == 1:
+            return (
+                "id_list_message=t-נכון.t-מצוין. "
+                "עכשיו נחזור על אותם התרגילים עוד פעם"
+                "&go_to_folder=/11"
+            )
+
+        if saved["stage"] == 2:
+            saved["order"] = random.sample(range(5), 5)
+            return (
+                "id_list_message=t-נכון.t-ועכשיו ננסה בלי סדר"
+                "&go_to_folder=/11"
+            )
+
+        result = saved["first_try_correct"]
+        CALL_EXERCISES.pop(call_id, None)
+        return (
+            "id_list_message=f-/9/010."
+            "t-כל הכבוד. סיימת חמישה עשר תרגילים."
+            f"t-ענית נכון בפעם הראשונה על.n-{result}.t-תרגילים"
+        )
+
+    return "id_list_message=t-נכון&go_to_folder=/11"
 @app.route("/transition")
 def transition():
     return "id_list_message=f-/7/000&go_to_folder=/6" 
