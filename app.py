@@ -243,11 +243,7 @@ def multiplication_test():
 
         result = saved["first_try_correct"]
         CALL_EXERCISES.pop(call_id, None)
-        return (
-            "id_list_message=f-/9/010."
-            "t-כל הכבוד. סיימת חמישה עשר תרגילים."
-            f"t-ענית נכון בפעם הראשונה על.n-{result}.t-תרגילים"
-        )
+        return "id_list_message=f-/9/010.t-כל הכבוד"
 
     return "id_list_message=t-נכון&go_to_folder=/11"
 @app.route("/transition")
