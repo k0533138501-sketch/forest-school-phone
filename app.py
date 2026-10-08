@@ -230,8 +230,7 @@ def multiplication_test():
 
         if saved["stage"] == 1:
             return (
-                "id_list_message=t-נכון.t-מצוין. "
-                "עכשיו נחזור על אותם התרגילים עוד פעם"
+                "id_list_message=t-נכון.t-מצוין."
                 "&go_to_folder=/11"
             )
 
