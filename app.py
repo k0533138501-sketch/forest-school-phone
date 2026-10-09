@@ -166,7 +166,7 @@ def run_exercises(correct_answers, audio_folder, answer):
             result = saved["first_try_correct"]
             CALL_EXERCISES.pop(call_id, None)
             if audio_folder == "/4":
-                 elapsed = int(time.time() - saved["start_time"])
+                elapsed = int(time.time() - saved["start_time"])
                 minutes, seconds = divmod(elapsed, 60)
                 return (
                     f"id_list_message="
