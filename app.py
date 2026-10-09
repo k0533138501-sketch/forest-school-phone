@@ -1,5 +1,6 @@
 from flask import Flask, request
 import random
+import time
 app = Flask(__name__)
 CALL_EXERCISES = {}
 CORRECT_ANSWERS = {
@@ -147,7 +148,8 @@ def run_exercises(correct_answers, audio_folder, answer):
             "correct_answer": correct_answers[str(exercise)],
             "total": 0,
             "first_try_correct": 0,
-            "had_error": False
+            "had_error": False,
+            "start_time": time.time() if audio_folder == "/4" else None
         }
         CALL_EXERCISES[call_id] = saved
 
@@ -164,7 +166,15 @@ def run_exercises(correct_answers, audio_folder, answer):
             result = saved["first_try_correct"]
             CALL_EXERCISES.pop(call_id, None)
             if audio_folder == "/4":
-                return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/7"
+                 elapsed = int(time.time() - saved["start_time"])
+                minutes, seconds = divmod(elapsed, 60)
+                return (
+                    f"id_list_message="
+                    f"t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות."
+                    f"t-הזמן שלך הוא.n-{minutes}.t-דקות."
+                    f"n-{seconds}.t-שניות"
+                    f"&go_to_folder=/7"
+                )
             if audio_folder == "/6":
                 return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/8"
             return f"id_list_message=f-/9/010.t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/10"
