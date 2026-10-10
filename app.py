@@ -149,7 +149,8 @@ def run_exercises(correct_answers, audio_folder, answer):
             "total": 0,
             "first_try_correct": 0,
             "had_error": False,
-            "start_time": time.time() if audio_folder == "/4" else None
+            "start_time": time.time() if audio_folder == "/4" else None,
+            "attempt": 1
         }
         CALL_EXERCISES[call_id] = saved
 
@@ -164,10 +165,22 @@ def run_exercises(correct_answers, audio_folder, answer):
             saved["first_try_correct"] += 1
         if saved["total"] >= 10:
             result = saved["first_try_correct"]
-            CALL_EXERCISES.pop(call_id, None)
+            
             if audio_folder == "/4":
                 elapsed = int(time.time() - saved["start_time"])
                 minutes, seconds = divmod(elapsed, 60)
+                if elapsed >= 60 and saved["attempt"] == 1:
+                    saved["attempt"] = 2
+                    saved["total"] = 0
+                    saved["first_try_correct"] = 0
+                    saved["had_error"] = False
+                    saved["start_time"] = time.time()
+                    saved["exercise"] = random.randint(0, len(correct_answers) - 1)
+                    saved["correct_answer"] = correct_answers[str(saved["exercise"])]
+                    return (
+                        "id_list_message=t-כל הכבוד! דובי פותר את התרגילים בפחות מדקה. בוא ננסה להתחרות איתו ולפתור שוב קצת יותר מהר&go_to_folder=/4"
+                    )
+                CALL_EXERCISES.pop(call_id, None)     
                 return (
                     f"id_list_message="
                     f"t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות."
@@ -175,6 +188,7 @@ def run_exercises(correct_answers, audio_folder, answer):
                     f"n-{seconds}.t-שניות"
                     f"&go_to_folder=/7"
                 )
+            CALL_EXERCISES.pop(call_id, None)
             if audio_folder == "/6":
                 return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/8"
             return f"id_list_message=f-/9/010.t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/10"
