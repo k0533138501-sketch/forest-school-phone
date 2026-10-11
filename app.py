@@ -330,7 +330,7 @@ def multiplication3_test():
             return "id_list_message=t-נכון.t-ועכשיו ננסה בלי סדר&go_to_folder=/12"
 
         CALL_EXERCISES.pop(call_id, None)
-        return "id_list_message=f-/9/010.t-כל הכבוד&go_to_folder=/13"
+        return "id_list_message=f-/9/010.t-כל הכבוד&go_to_folder=/14"
 
     return "id_list_message=t-נכון&go_to_folder=/12"
 
@@ -340,3 +340,6 @@ def transition():
 @app.route("/story1")
 def story1():
     return "id_list_message=f-/1/000&go_to_folder=/4"
+@app.route("/dragonfly_fable")
+def dragonfly_fable():
+    return "id_list_message=f-/14/000"
