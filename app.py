@@ -178,7 +178,12 @@ def run_exercises(correct_answers, audio_folder, answer):
                     saved["exercise"] = random.randint(0, len(correct_answers) - 1)
                     saved["correct_answer"] = correct_answers[str(saved["exercise"])]
                     return (
-                        "id_list_message=t-כל הכבוד! דובי פותר את התרגילים בפחות מדקה. בוא ננסה להתחרות איתו ולפתור שוב קצת יותר מהר&go_to_folder=/4"
+                        "id_list_message="
+                        "t-כל הכבוד."
+                        "t-דובי פותר את התרגילים בפחות מדקה."
+                        "t-בוא ננסה להתחרות איתו."
+                        "t-נפתור שוב את התרגילים."
+                        "&go_to_folder=/4"
                     )
                 CALL_EXERCISES.pop(call_id, None)     
                 return (
