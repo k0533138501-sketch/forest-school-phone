@@ -330,8 +330,7 @@ def multiplication3_test():
             return "id_list_message=t-נכון.t-ועכשיו ננסה בלי סדר&go_to_folder=/12"
 
         CALL_EXERCISES.pop(call_id, None)
-        return "go_to_folder=/14"
-
+        return "id_list_message=f-/9/010.t-הכבוד&go_to_folder=/14"
     return "id_list_message=t-נכון&go_to_folder=/12"
 
 @app.route("/transition")
