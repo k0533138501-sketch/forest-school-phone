@@ -283,8 +283,7 @@ def multiplication_test():
 
         result = saved["first_try_correct"]
         CALL_EXERCISES.pop(call_id, None)
-        return "id_list_message=f-/9/010.t-כל הכבוד"
-
+        return "id_list_message=f-/9/010.t-כל הכבוד&go_to_folder=/12"
     return "id_list_message=t-נכון&go_to_folder=/11"
 @app.route("/multiplication3_test")
 def multiplication3_test():
