@@ -149,7 +149,7 @@ def run_exercises(correct_answers, audio_folder, answer):
             "total": 0,
             "first_try_correct": 0,
             "had_error": False,
-            "start_time": time.time() if audio_folder == "/4" else None,
+            "start_time": time.time() if audio_folder in ("/4", "/6", "/9") else None,
             "attempt": 1
         }
         CALL_EXERCISES[call_id] = saved
@@ -158,7 +158,7 @@ def run_exercises(correct_answers, audio_folder, answer):
     correct_answer = saved["correct_answer"]
 
     if not answer:
-        if audio_folder == "/4" and saved["start_time"] is None:
+        if audio_folder in ("/4", "/6", "/9") and saved["start_time"] is None:
             saved["start_time"] = time.time()
         return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     if answer == correct_answer:
@@ -168,7 +168,7 @@ def run_exercises(correct_answers, audio_folder, answer):
         if saved["total"] >= 10:
             result = saved["first_try_correct"]
             
-            if audio_folder == "/4":
+            if audio_folder in ("/4", "/6", "/9"):
                 elapsed = int(time.time() - saved["start_time"])
                 minutes, seconds = divmod(elapsed, 60)
                 if elapsed >= 60 and saved["attempt"] == 1:
@@ -185,20 +185,22 @@ def run_exercises(correct_answers, audio_folder, answer):
                         f"t-הזמן שלך הוא.n-{minutes}.t-דקות."
                         f"n-{seconds}.t-שניות."
                         "f-/4/010"
-                        "&go_to_folder=/4"
+                        f"&go_to_folder={audio_folder}"
                     )
-                CALL_EXERCISES.pop(call_id, None)     
+                CALL_EXERCISES.pop(call_id, None)
+                next_folder = {
+                    "/4": "/7",
+                    "/6": "/8",
+                    "/9": "/10"
+                }[audio_folder]
                 return (
                     f"id_list_message="
                     f"t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות."
                     f"t-הזמן שלך הוא.n-{minutes}.t-דקות."
                     f"n-{seconds}.t-שניות"
-                    f"&go_to_folder=/7"
+                    f"&go_to_folder={next_folder}"
                 )
-            CALL_EXERCISES.pop(call_id, None)
-            if audio_folder == "/6":
-                return f"id_list_message=t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/8"
-            return f"id_list_message=f-/9/010.t-ענית על עשר שאלות.t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות&go_to_folder=/10"
+           
                 
         exercise = random.randint(0, len(correct_answers) - 1)
         saved["exercise"] = exercise
