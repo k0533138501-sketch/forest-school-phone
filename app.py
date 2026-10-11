@@ -158,6 +158,8 @@ def run_exercises(correct_answers, audio_folder, answer):
     correct_answer = saved["correct_answer"]
 
     if not answer:
+        if audio_folder == "/4" and saved["start_time"] is None:
+            saved["start_time"] = time.time()
         return f"read=f-{audio_folder}/{exercise:03d}=answer,,1,1,7,No,yes,no,,,,,,InsertLettersTypeChangeNo,no"
     if answer == correct_answer:
         saved["total"] += 1
@@ -174,15 +176,15 @@ def run_exercises(correct_answers, audio_folder, answer):
                     saved["total"] = 0
                     saved["first_try_correct"] = 0
                     saved["had_error"] = False
-                    saved["start_time"] = time.time()
+                    saved["start_time"] = None
                     saved["exercise"] = random.randint(0, len(correct_answers) - 1)
                     saved["correct_answer"] = correct_answers[str(saved["exercise"])]
                     return (
                         "id_list_message="
-                        "t-כל הכבוד."
-                        "t-דובי פותר את התרגילים בפחות מדקה."
-                        "t-בוא ננסה להתחרות איתו."
-                        "t-נפתור שוב את התרגילים."
+                        f"t-ענית נכון בפעם הראשונה על.n-{result}.t-שאלות."
+                        f"t-הזמן שלך הוא.n-{minutes}.t-דקות."
+                        f"n-{seconds}.t-שניות."
+                        "f-/4/010"
                         "&go_to_folder=/4"
                     )
                 CALL_EXERCISES.pop(call_id, None)     
